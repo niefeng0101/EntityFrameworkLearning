@@ -1,0 +1,187 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="db_shengtongModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tb_inventory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ConstCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="SpoolSpec" Type="nvarchar" MaxLength="50" />
+          <Property Name="SteelSpec" Type="nvarchar" MaxLength="50" />
+          <Property Name="LR" Type="nvarchar" MaxLength="50" />
+          <Property Name="AgingTime" Type="int" />
+          <Property Name="AllNumber" Type="int" />
+          <Property Name="NowNumber" Type="int" />
+          <Property Name="OvertimeNumber" Type="int" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“db_shengtong.dbo.tb_outdetail”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="tb_outdetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PackageOutboundWorkTaskId" Type="int" />
+          <Property Name="OutOrder" Type="int" />
+          <Property Name="SpoolCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="EndTime" Type="datetime" />
+          <Property Name="InWarehouseTime" Type="nvarchar" MaxLength="50" />
+          <Property Name="Status" Type="int" />
+        </EntityType>
+        <EntityType Name="tb_outstock">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ConstCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="SpoolSpec" Type="nvarchar" MaxLength="50" />
+          <Property Name="SteelSpec" Type="nvarchar" MaxLength="50" />
+          <Property Name="LR" Type="nvarchar" MaxLength="50" />
+          <Property Name="OutNumber" Type="int" />
+          <Property Name="Status" Type="int" />
+          <Property Name="StartTime" Type="datetime" />
+          <Property Name="EndTime" Type="datetime" />
+        </EntityType>
+        <EntityContainer Name="db_shengtongModelStoreContainer">
+          <EntitySet Name="tb_inventory" EntityType="Self.tb_inventory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_outstock" EntityType="Self.tb_outstock" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_outdetail" EntityType="Self.tb_outdetail" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [tb_outdetail].[Id] AS [Id], 
+    [tb_outdetail].[PackageOutboundWorkTaskId] AS [PackageOutboundWorkTaskId], 
+    [tb_outdetail].[OutOrder] AS [OutOrder], 
+    [tb_outdetail].[SpoolCode] AS [SpoolCode], 
+    [tb_outdetail].[EndTime] AS [EndTime], 
+    [tb_outdetail].[InWarehouseTime] AS [InWarehouseTime], 
+    [tb_outdetail].[Status] AS [Status]
+    FROM [dbo].[tb_outdetail] AS [tb_outdetail]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="db_shengtongModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tb_inventory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ConstCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SpoolSpec" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SteelSpec" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LR" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AgingTime" Type="Int32" />
+          <Property Name="AllNumber" Type="Int32" />
+          <Property Name="NowNumber" Type="Int32" />
+          <Property Name="OvertimeNumber" Type="Int32" />
+        </EntityType>
+        <EntityType Name="tb_outstock">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ConstCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SpoolSpec" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SteelSpec" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LR" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OutNumber" Type="Int32" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="StartTime" Type="DateTime" Precision="3" />
+          <Property Name="EndTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="tb_outdetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PackageOutboundWorkTaskId" Type="Int32" />
+          <Property Name="OutOrder" Type="Int32" />
+          <Property Name="SpoolCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EndTime" Type="DateTime" Precision="3" />
+          <Property Name="InWarehouseTime" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" />
+        </EntityType>
+        <EntityContainer Name="db_shengtongEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tb_inventory" EntityType="Self.tb_inventory" />
+          <EntitySet Name="tb_outstock" EntityType="Self.tb_outstock" />
+          <EntitySet Name="tb_outdetail" EntityType="Self.tb_outdetail" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="db_shengtongModelStoreContainer" CdmEntityContainer="db_shengtongEntities">
+          <EntitySetMapping Name="tb_inventory">
+            <EntityTypeMapping TypeName="db_shengtongModel.tb_inventory">
+              <MappingFragment StoreEntitySet="tb_inventory">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ConstCode" ColumnName="ConstCode" />
+                <ScalarProperty Name="SpoolSpec" ColumnName="SpoolSpec" />
+                <ScalarProperty Name="SteelSpec" ColumnName="SteelSpec" />
+                <ScalarProperty Name="LR" ColumnName="LR" />
+                <ScalarProperty Name="AgingTime" ColumnName="AgingTime" />
+                <ScalarProperty Name="AllNumber" ColumnName="AllNumber" />
+                <ScalarProperty Name="NowNumber" ColumnName="NowNumber" />
+                <ScalarProperty Name="OvertimeNumber" ColumnName="OvertimeNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_outstock">
+            <EntityTypeMapping TypeName="db_shengtongModel.tb_outstock">
+              <MappingFragment StoreEntitySet="tb_outstock">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ConstCode" ColumnName="ConstCode" />
+                <ScalarProperty Name="SpoolSpec" ColumnName="SpoolSpec" />
+                <ScalarProperty Name="SteelSpec" ColumnName="SteelSpec" />
+                <ScalarProperty Name="LR" ColumnName="LR" />
+                <ScalarProperty Name="OutNumber" ColumnName="OutNumber" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_outdetail">
+            <EntityTypeMapping TypeName="db_shengtongModel.tb_outdetail">
+              <MappingFragment StoreEntitySet="tb_outdetail">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PackageOutboundWorkTaskId" ColumnName="PackageOutboundWorkTaskId" />
+                <ScalarProperty Name="OutOrder" ColumnName="OutOrder" />
+                <ScalarProperty Name="SpoolCode" ColumnName="SpoolCode" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="InWarehouseTime" ColumnName="InWarehouseTime" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{51AB06AA-8956-4D2A-9575-054FA36862ED}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Kengic.Was.Domain.SntonInterface</RootNamespace>
+    <AssemblyName>Kengic.Was.Domain.SntonInterface</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="GetSpoolSpecInfoRepository.cs" />
+    <Compile Include="PackageInventoryRepository.cs" />
+    <Compile Include="PackageOutboundWorkTaskDetailRepository.cs" />
+    <Compile Include="PackageOutboundWorkTaskRepository.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Contracts\Kengic.Was.Domain.Entity.Common\Kengic.Was.Domain.Entity.Common.csproj">
+      <Project>{2D4E3E44-BC2E-478E-99C3-D8166E4BE049}</Project>
+      <Name>Kengic.Was.Domain.Entity.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Implements\Kengic.Was.Domain.Common\Kengic.Was.Domain.Common.csproj">
+      <Project>{2B4A7623-C470-4137-8A28-E69F58000A37}</Project>
+      <Name>Kengic.Was.Domain.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Model\Kengic.Was.Domain.DatabaseInterface\Kengic.Was.Domain.DatabaseInterface.csproj">
+      <Project>{ECD62CB7-6FA7-4F74-ACEF-2239E736D88B}</Project>
+      <Name>Kengic.Was.Domain.DatabaseInterface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SntonInterface_Contract\Kengic.Was.Domain.Entity.SntonInterface.csproj">
+      <Project>{7542DCC7-9559-40AF-9EAB-888F38DDB913}</Project>
+      <Name>Kengic.Was.Domain.Entity.SntonInterface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DatabaseInterface\Kengic.Was.Domain.Model.SntonInterface.csproj">
+      <Project>{6F0448F6-D8E7-4456-AF28-50A7475BCC07}</Project>
+      <Name>Kengic.Was.Domain.Model.SntonInterface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\KjrobotInterface\Kengic.Was.Domain.Model.KjrobotInterfaceModel.csproj">
+      <Project>{8636D19C-A272-4122-ACE2-2E7980B4F4D1}</Project>
+      <Name>Kengic.Was.Domain.Model.KjrobotInterfaceModel</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>XCopy . $(SolutionDir)\Output\$(ConfigurationName)\$(PlatformName) /C /D /R /Y /E /I
+</PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
